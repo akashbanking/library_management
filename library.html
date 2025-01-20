@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sriram Engineering Library Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+        }
+
+        /* Login Page Styles */
+        .login-page {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: #fff;
+        }
+
+        .login-container {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .login-container h1 {
+            margin-bottom: 20px;
+        }
+
+        .login-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #00c6ff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .login-container button:hover {
+            background-color: #0072ff;
+        }
+
+        /* Main App Styles */
+        .app {
+            display: none;
+        }
+
+        body.app-active .login-page {
+            display: none;
+        }
+
+        body.app-active .app {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+            body {
+            background-image: url('background image.jpg');
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+          }
+
+        header {
+            background: #f4b41a;
+            color: #143d59;
+            padding: 15px;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .header-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .header-nav a {
+            margin: 0 15px;
+            color: #143d59;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .header-nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        h2 {
+            text-align: center;
+            color: #cbce91ff;
+            background-color: #76528bff;
+            display: inline-block;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .form {
+            margin: 0 auto;
+            max-width: 500px;
+            background: rgba(0, 0, 0, 0);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(242, 243, 240, 0.962);
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #101820ff;
+            color: #fee715ff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #efeaeadf;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: rgba(241, 238, 238, 0.827);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        th, td {
+            border: 1px solid #efe8e8ea;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #1e3c72;
+            color: white;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: rgba(19, 218, 85, 0.922);
+        }
+
+        footer {
+            background-color: rgba(30, 60, 114, 0.9);
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .action-buttons button {
+            margin-right: 5px;
+        }
+
+        .contact-icons {
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-icons i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+            color: #143d59;
+        }
+
+        .contact-icons a {
+            color: #143d59;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        .contact-icons a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Page -->
+    <div class="login-page">
+        <div class="login-container">
+            <h1>Login</h1>
+            <input type="text" id="username" placeholder="Username">
+            <input type="password" id="password" placeholder="Password">
+            <button onclick="login()">Login</button>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div class="app">
+        <header>
+            Library Management App
+            <div class="header-nav">
+                <a href="#add">Add Book</a>
+                <a href="#list">Book List</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </header>
+
+        <div class="container">
+            <section id="add">
+                <h2>Add New Book</h2>
+                <div class="form">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" placeholder="Book Title">
+
+                    <label for="author">Author</label>
+                    <input type="text" id="author" placeholder="Author Name">
+
+                    <label for="category">Category</label>
+                    <select id="category">
+                        <option value="Fiction">Fiction</option>
+                        <option value="Non-Fiction">Non-Fiction</option>
+                        <option value="Biography">Biography</option>
+                        <option value="Science">Science</option>
+                    </select>
+
+                    <button onclick="addBook()">Add Book</button>
+                </div>
+            </section>
+
+            <section id="list">
+                <h2>Book List</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Category</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="book-list">
+                        <!-- Books will be added dynamically -->
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="contact">
+                <h2>Contact Us</h2>
+                <p>If you have any questions or feedback, please reach out to us:</p>
+                <p class="contact-icons">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:library@support.com">library@support.com</a>
+                </p>
+                <p class="contact-icons">
+                    <i class="fab fa-whatsapp"></i>
+                    <a href="https://wa.me/9797565252" target="_blank">9797565252</a>
+                </p>
+            </section>
+        </div>
+
+        <footer>
+            &copy; 2025 Library App. All Rights Reserved.
+        </footer>
+    </div>
+
+    <script>
+        function login() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            // Simple validation for demonstration purposes
+            if (username === "admin" && password === "password") {
+                document.body.classList.add("app-active");
+            } else {
+                alert("Invalid username or password!");
+            }
+        }
+
+        const bookList = document.getElementById("book-list");
+
+        function addBook() {
+            const title = document.getElementById("title").value;
+            const author = document.getElementById("author").value;
+            const category = document.getElementById("category").value;
+
+            if (title && author && category) {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${title}</td>
+                    <td>${author}</td>
+                    <td>${category}</td>
+                    <td class="action-buttons">
+                        <button onclick="editBook(this)">Edit</button>
+                        <button onclick="deleteBook(this)">Delete</button>
+                    </td>
+                `;
+                bookList.appendChild(row);
+
+                // Clear inputs
+                document.getElementById("title").value = "";
+                document.getElementById("author").value = "";
+                document.getElementById("category").value = "";
+            } else {
+                alert("Please fill all fields!");
+            }
+        }
+
+        function editBook(button) {
+            const row = button.parentElement.parentElement;
+            const title = row.children[0].textContent;
+            const author = row.children[1].textContent;
+            const category = row.children[2].textContent;
+
+            // Populate form with current values
+            document.getElementById("title").value = title;
+            document.getElementById("author").value = author;
+            document.getElementById("category").value = category;
+
+            // Remove the row being edited
+            bookList.removeChild(row);
+        }
+
+        function deleteBook(button) {
+            const row = button.parentElement.parentElement;
+            bookList.removeChild(row);
+        }
+    </script>
+</body>
+</html>
